@@ -53,3 +53,51 @@ export const SOLUTIONS: Solution[] = [
         features: ["Création juridique", "Recrutement initial", "Gestion administrative", "Portage salarial"],
     },
 ];
+
+export interface ClientReference {
+    id: string;
+    name: string;
+    logo: string;
+    industry: string;
+}
+
+export interface Testimonial {
+    id: string;
+    author: string;
+    role: string;
+    company: string;
+    content: string;
+}
+
+export const CLIENTS: ClientReference[] = [
+    { id: "1", name: "TechMaroc", logo: "/logos/techmaroc.png", industry: "Technologie" },
+    { id: "2", name: "Banque Atlantique", logo: "/logos/banque.png", industry: "Finance" },
+    { id: "3", name: "Global Industries", logo: "/logos/global.png", industry: "Industrie" },
+    { id: "4", name: "StartUp Valley", logo: "/logos/startup.png", industry: "Innovation" },
+    { id: "5", name: "HealthCare Plus", logo: "/logos/health.png", industry: "Santé" },
+    { id: "6", name: "EcoEnergy", logo: "/logos/eco.png", industry: "Énergie" },
+];
+
+export const TESTIMONIALS: Testimonial[] = [
+    {
+        id: "1",
+        author: "Karim Benjelloun",
+        role: "DRH",
+        company: "TechMaroc",
+        content: "TalentMind a transformé notre approche du recrutement. L'IA nous a permis de diviser par deux le temps de sourcing tout en améliorant la qualité des profils."
+    },
+    {
+        id: "2",
+        author: "Sarah Idrissi",
+        role: "Directrice Générale",
+        company: "StartUp Valley",
+        content: "L'accompagnement stratégique pour notre implantation au Maroc a été exemplaire. Une expertise locale combinée à une vision globale."
+    },
+    {
+        id: "3",
+        author: "Mehdi Tazi",
+        role: "Responsable Innovation",
+        company: "Banque Atlantique",
+        content: "Les solutions d'automatisation proposées par TalentMind sont d'une efficacité redoutable. Un partenaire incontournable pour la transformation digitale RH."
+    }
+];

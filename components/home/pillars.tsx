@@ -5,6 +5,8 @@ import { getPillars } from "@/lib/api/api";
 import { Pillar } from "@/lib/data"; // Import type
 import { motion } from "framer-motion";
 import { Users, Brain, Globe, Loader2 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 // Map icon strings to components
 const iconMap: Record<string, any> = {
@@ -34,7 +36,7 @@ export function Pillars() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] -z-10 pointer-events-none" />
 
             <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
-                <h2 className="text-3xl font-bold tracking-tighter text-center mb-12 sm:text-4xl md:text-5xl bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] bg-clip-text text-transparent pb-2">
+                <h2 className="text-3xl font-bold tracking-tighter text-center mb-12 sm:text-4xl md:text-5xl bg-gradient-to-b from-neutral-500 to-neutral-800 bg-clip-text text-transparent">
                     Nos Piliers d'Excellence
                 </h2>
 
@@ -49,33 +51,70 @@ export function Pillars() {
                                 transition={{ delay: index * 0.15, duration: 0.8, ease: "easeOut" }}
                                 className="group relative h-full"
                             >
-                                {/* Card background slightly adjusted for inside-block contrast */}
-                                <div className="h-full p-10 bg-background/40 border border-white/5 hover:border-primary/20 transition-all duration-500 relative overflow-hidden flex flex-col justify-end min-h-[400px] rounded-2xl">
-                                    {/* Large Typographic Background Element */}
-                                    <div className="absolute top-4 left-6">
-                                        <span className="text-[12rem] leading-none font-bold text-foreground/5 font-mono tracking-tighter select-none group-hover:text-primary/10 transition-colors duration-500">
-                                            0{index + 1}
-                                        </span>
+                                <Link href="/solutions" className="block h-full">
+                                    {/* Card background with image */}
+                                    <div className="h-full p-10 bg-background/40 border border-white/10 hover:border-primary/30 transition-all duration-500 relative overflow-hidden flex flex-col justify-end min-h-[400px] rounded-3xl cursor-pointer">
+                                        {/* Background Images */}
+                                        {index === 0 && (
+                                            <div className="absolute inset-0 z-0">
+                                                <Image
+                                                    src="/images/solutions-audit-bg.jpg"
+                                                    alt="Conseil RH"
+                                                    fill
+                                                    className="object-cover opacity-100 group-hover:scale-105 transition-transform duration-700"
+                                                />
+                                                <div className="absolute inset-0 bg-black/60" />
+                                            </div>
+                                        )}
+                                        {index === 1 && (
+                                            <div className="absolute inset-0 z-0">
+                                                <Image
+                                                    src="/images/solutions-management-bg.jpg"
+                                                    alt="TalentMind Hub"
+                                                    fill
+                                                    className="object-cover opacity-100 group-hover:scale-105 transition-transform duration-700"
+                                                />
+                                                <div className="absolute inset-0 bg-black/60" />
+                                            </div>
+                                        )}
+                                        {index === 2 && (
+                                            <div className="absolute inset-0 z-0">
+                                                <Image
+                                                    src="/images/solutions-morocco-bg.jpg"
+                                                    alt="Accompagnement Filiales"
+                                                    fill
+                                                    className="object-cover opacity-100 group-hover:scale-105 transition-transform duration-700"
+                                                />
+                                                <div className="absolute inset-0 bg-black/60" />
+                                            </div>
+                                        )}
+
+                                        {/* Large Typographic Background Element */}
+                                        <div className="absolute top-4 left-6">
+                                            <span className="text-[12rem] leading-none font-bold text-white/10 font-mono tracking-tighter select-none group-hover:text-white/20 transition-colors duration-500">
+                                                0{index + 1}
+                                            </span>
+                                        </div>
+
+                                        {/* Geometric Accent Line */}
+                                        <div className="w-12 h-0.5 bg-white/30 mb-6 group-hover:w-24 group-hover:bg-white/60 transition-all duration-500" />
+
+                                        <div className="relative z-10">
+                                            <h3 className="text-3xl font-light tracking-tight mb-4 text-white group-hover:text-white drop-shadow-lg transition-colors duration-300">
+                                                {pillar.title}
+                                            </h3>
+
+                                            <p className="text-gray-200 leading-relaxed text-lg font-light">
+                                                {pillar.description}
+                                            </p>
+                                        </div>
+
+                                        {/* Corner Accent */}
+                                        <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div className="w-2 h-2 bg-white rounded-full" />
+                                        </div>
                                     </div>
-
-                                    {/* Geometric Accent Line */}
-                                    <div className="w-12 h-0.5 bg-primary/20 mb-6 group-hover:w-24 group-hover:bg-primary transition-all duration-500" />
-
-                                    <div className="relative z-10">
-                                        <h3 className="text-3xl font-light tracking-tight mb-4 group-hover:text-primary transition-colors duration-300">
-                                            {pillar.title}
-                                        </h3>
-
-                                        <p className="text-muted-foreground leading-relaxed text-lg font-light">
-                                            {pillar.description}
-                                        </p>
-                                    </div>
-
-                                    {/* Corner Accent */}
-                                    <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <div className="w-2 h-2 bg-primary rounded-full" />
-                                    </div>
-                                </div>
+                                </Link>
                             </motion.div>
                         );
                     })}

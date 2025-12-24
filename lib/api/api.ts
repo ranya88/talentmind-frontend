@@ -1,4 +1,4 @@
-import { PILLARS, SOLUTIONS, Pillar, Solution } from "@/lib/data";
+import { PILLARS, SOLUTIONS, CLIENTS, TESTIMONIALS, Pillar, Solution, ClientReference, Testimonial } from "@/lib/data";
 
 export async function getPillars(): Promise<Pillar[]> {
     // Simulate network delay
@@ -10,6 +10,16 @@ export async function getSolutions(): Promise<Solution[]> {
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 800));
     return SOLUTIONS;
+}
+
+export async function getClients(): Promise<ClientReference[]> {
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    return CLIENTS;
+}
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    return TESTIMONIALS;
 }
 
 export interface ContactFormData {

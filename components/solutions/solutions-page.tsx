@@ -4,8 +4,9 @@ import useSWR from "swr";
 import { getSolutions } from "@/lib/api/api";
 import { Solution } from "@/lib/data";
 import { motion } from "framer-motion";
-import { Loader2, CheckCircle2, ArrowRight } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { Loader2, ArrowRight } from "lucide-react";
+import Image from "next/image";
+
 
 export default function SolutionsPageClient() {
     const { data: solutions, error, isLoading } = useSWR<Solution[]>("solutions", getSolutions);
@@ -34,9 +35,11 @@ export default function SolutionsPageClient() {
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-4 bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] bg-clip-text text-transparent pb-2"
+                        className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-4"
                     >
-                        Nos Solutions
+                        <span className="bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] bg-clip-text text-transparent">
+                            Nos Solutions
+                        </span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -67,23 +70,64 @@ export default function SolutionsPageClient() {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8, ease: "easeOut" }}
                             >
-                                <div className="group relative aspect-[4/3] rounded-sm overflow-hidden bg-muted/5 border border-[#8b5cf6]/20 shadow-[0_0_30px_-10px_rgba(139,92,246,0.15)] hover:border-[#8b5cf6]/50 hover:shadow-[0_0_50px_-10px_rgba(139,92,246,0.3)] transition-all duration-500">
-                                    {/* Permanent Gradient Wash - Logo Theme */}
-                                    <div className="absolute inset-0 bg-gradient-to-br from-[#3b82f6]/10 to-[#8b5cf6]/10 opacity-100 transition-opacity duration-500" />
+                                <div className="group relative aspect-[4/3] rounded-3xl overflow-hidden bg-muted/5 border border-[#8b5cf6]/20 shadow-[0_0_30px_-10px_rgba(139,92,246,0.15)] hover:border-[#8b5cf6]/50 hover:shadow-[0_0_50px_-10px_rgba(139,92,246,0.3)] transition-all duration-500">
+                                    {/* Custom Background Image for First Item (Audit) */}
+                                    {index === 0 && (
+                                        <div className="absolute inset-0 z-0">
+                                            <Image
+                                                src="/images/solutions-audit-bg.jpg"
+                                                alt="Audit Background"
+                                                fill
+                                                className="object-cover opacity-100 group-hover:scale-105 transition-transform duration-700"
+                                            />
+                                            <div className="absolute inset-0 bg-black/50 backdrop-blur-[0px]" />
+                                        </div>
+                                    )}
+
+                                    {/* Custom Background Image for Second Item (Management) */}
+                                    {index === 1 && (
+                                        <div className="absolute inset-0 z-0">
+                                            <Image
+                                                src="/images/solutions-management-bg.jpg"
+                                                alt="Management Background"
+                                                fill
+                                                className="object-cover opacity-100 group-hover:scale-105 transition-transform duration-700"
+                                            />
+                                            <div className="absolute inset-0 bg-black/50 backdrop-blur-[0px]" />
+                                        </div>
+                                    )}
+
+                                    {/* Custom Background Image for Third Item (Morocco) */}
+                                    {index === 2 && (
+                                        <div className="absolute inset-0 z-0">
+                                            <Image
+                                                src="/images/solutions-morocco-bg.jpg"
+                                                alt="Morocco Background"
+                                                fill
+                                                className="object-cover opacity-100 group-hover:scale-105 transition-transform duration-700"
+                                            />
+                                            <div className="absolute inset-0 bg-black/50 backdrop-blur-[0px]" />
+                                        </div>
+                                    )}
+
+                                    {/* Permanent Gradient Wash - Logo Theme (Hidden for items with images) */}
+                                    {index > 2 && (
+                                        <div className="absolute inset-0 bg-gradient-to-br from-[#3b82f6]/10 to-[#8b5cf6]/10 opacity-100 transition-opacity duration-500" />
+                                    )}
 
                                     {/* Large Typographic Background */}
                                     <div className="absolute top-8 left-8">
-                                        <span className="text-[10rem] leading-none font-bold text-foreground/5 font-mono tracking-tighter select-none group-hover:text-primary/10 transition-colors duration-500">
+                                        <span className={`text-[10rem] leading-none font-bold font-mono tracking-tighter select-none transition-colors duration-500 ${index <= 2 ? 'text-white/20' : 'text-foreground/5 group-hover:text-primary/10'}`}>
                                             0{index + 1}
                                         </span>
                                     </div>
 
                                     {/* Minimalist Geometric Lines */}
-                                    <div className="absolute bottom-8 right-8 w-16 h-16 border-b border-r border-primary/20 group-hover:border-primary/50 transition-colors duration-500" />
+                                    <div className={`absolute bottom-8 right-8 w-16 h-16 border-b border-r transition-colors duration-500 ${index <= 2 ? 'border-white/50' : 'border-primary/20 group-hover:border-primary/50'}`} />
 
                                     {/* Centered Minimal Title for Visual Context */}
                                     <div className="absolute inset-0 flex items-center justify-center p-8">
-                                        <h3 className="text-3xl md:text-5xl font-extralight tracking-tighter text-foreground/80 group-hover:text-primary transition-colors duration-500 text-center">
+                                        <h3 className={`text-3xl md:text-5xl tracking-tighter transition-colors duration-500 text-center ${index <= 2 ? 'font-bold text-white drop-shadow-lg scale-105' : 'font-extralight text-foreground/80 group-hover:text-primary'}`}>
                                             {solution.title}
                                         </h3>
                                     </div>

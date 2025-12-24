@@ -1,12 +1,28 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronsDown } from "lucide-react";
 
 export function Hero() {
+    const [showArrow, setShowArrow] = useState(true);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 100) {
+                setShowArrow(false);
+            } else {
+                setShowArrow(true);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
         <section className="relative overflow-hidden min-h-screen flex items-center justify-center">
             {/* Background Image with Overlay */}
@@ -65,6 +81,26 @@ export function Hero() {
                     </motion.div>
                 </div>
             </div>
+
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{
+                    opacity: showArrow ? 1 : 0,
+                    y: showArrow ? [0, 10, 0] : 0
+                }}
+                transition={{
+                    opacity: { duration: 0.3 },
+                    y: {
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatType: "loop"
+                    }
+                }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-white cursor-pointer hover:opacity-100 transition-opacity"
+                style={{ pointerEvents: showArrow ? "auto" : "none" }}
+            >
+                <ChevronsDown className="h-10 w-10 animate-pulse" strokeWidth={1.5} />
+            </motion.div>
         </section>
     );
 }

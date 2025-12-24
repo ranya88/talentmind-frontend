@@ -34,7 +34,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
     const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
     const addNotification = (type: NotificationType, message: string) => {
-        const id = Math.random().toString(36).substring(7);
+        const id = crypto.randomUUID();
         setNotifications((prev) => [...prev, { id, type, message }]);
 
         // Auto remove after 3 seconds

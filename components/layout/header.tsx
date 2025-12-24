@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const navLinks = [
     { href: "/", label: "Accueil" },
     { href: "/solutions", label: "Nos Solutions" },
+    { href: "/references", label: "Nos Références" },
     { href: "/contact", label: "Contact" },
 ];
 
@@ -19,12 +20,12 @@ export function Header() {
     const pathname = usePathname();
     const { toggleMobileMenu, isMobileMenuOpen, closeMobileMenu } = useUI();
 
-    const isHomePage = pathname === "/";
+    const isTransparentHeaderPage = pathname === "/";
 
     return (
         <header className={cn(
             "w-full z-40 transition-all duration-300",
-            isHomePage
+            isTransparentHeaderPage
                 ? "absolute top-0 bg-transparent border-transparent"
                 : "sticky top-0 border-b bg-background/80 backdrop-blur-md"
         )}>
